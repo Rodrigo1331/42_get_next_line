@@ -6,13 +6,13 @@
 /*   By: rcruz-an <rcruz-an@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 12:06:19 by rcruz-an          #+#    #+#             */
-/*   Updated: 2022/12/24 15:06:13 by rcruz-an         ###   ########.fr       */
+/*   Updated: 2022/12/24 15:32:44 by rcruz-an         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+/* void	*ft_calloc(size_t nmemb, size_t size)
 {
 	char	*ptr;
 	int		i;
@@ -20,7 +20,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 
 	i = 0;
 	n = nmemb * size;
-	ptr = (char *)malloc(nmemb * size);
+	ptr = malloc(nmemb * size);
 	if (!ptr)
 		return (NULL);
 	while (n-- > 0)
@@ -74,7 +74,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	i = 0;
 	j = 0;
 	len = ft_strlen(s1) + ft_strlen(s2) + 1;
-	str = (char *)malloc(len * sizeof(char));
+	str = malloc(len * sizeof(char));
 	if (str == 0)
 		return (0);
 	while (ft_strlen(s1) > i)
@@ -89,94 +89,98 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	}
 	str[i + j] = '\0';
 	return (str);
-}
+} */
 
 
-char	*RecreatStash(char *s)
+
+
+
+
+
+char	*start_next_stash(char *stash)
 {
-	char	*new_s;
+	char	*new_stash;
 	int		i;
 	int		j;
 
-	i = LineLength(s);
-	if (!s[i])
-	{
-		free(s);
-		return (0);
-	}
+	i = LineLength(stash);
 	j = 0;
-	new_s = (char *)ft_calloc(sizeof(char), (ft_strlen(s) - i + 1));
+	if (!stash[i])
+	{
+		free(stash);
+		return (NULL);
+	}
+	new_stash = ft_calloc((ft_strlen(stash) - i + 1), sizeof(char));
 	i++;
-	while (s[i])
-		new_s[j++] = s[i++];
-	free (s);
-	return (new_s);
+	while (stash[i])
+		new_stash[j++] = stash[i++];
+	free (stash);
+	return (new_stash);
 }
 
-
-char	*EndLine(char *s)
+char	*ft_each_line(char *stash)
 {
-	char	*l;
+	char	*line;
 	int		i;
 
 	i = 0;
-	if (!s[i])
-		return (0);
-	l = (char *)ft_calloc((LineLength(s) + 2), sizeof(char));
+	if (!stash[i])
+		return (NULL);
+	line = ft_calloc((LineLength(stash) + 2), sizeof(char));
 	i = 0;
-	while (s[i] != '\n' && s[i] != '\0')
+	while (stash[i] != '\n' && stash[i] != '\0')
 	{
-		l[i] = s[i];
+		line[i] = stash[i];
 		i++;
 	}
-	if (s[i] == '\n')
-		l[i] = '\n';
-	return (l);
+	if (stash[i] == '\n')
+		line[i] = '\n';
+	return (line);
 }
 
-char	*ReadLine(char *s, int fd)
+char	*ft_read_and_join(char *stash, int fd)
 {
-	char	*t;
-	int		i;
+	char	*temp;
+	int		count_read;
 
-	if (!s)
-		s = ft_calloc(1, 1);
-	t = (char *)ft_calloc ((BUFFER_SIZE + 1), sizeof(char));
-	i = 1;
-	while (IsItTheLastLine(s) == 0 && i != 0)
+	if (!stash)
+		stash = ft_calloc(1, 1);
+	temp = ft_calloc ((BUFFER_SIZE + 1), sizeof(char));
+	count_read = 1;
+	while (IsItTheLastLine(stash) == 0 && count_read != 0)
 	{
-		i = read(fd, t, BUFFER_SIZE);
-		if (i < 0)
+		count_read = read(fd, temp, BUFFER_SIZE);
+		if (count_read == -1)
 		{
-			free (t);
-			free (s);
-			return (0);
+			free (temp);
+			free (stash);
+			return (NULL);
 		}
-		t[i] = '\0';
-		s = ft_strjoin(s, t);
+		temp [count_read] = '\0';
+		stash = ft_strjoin(stash, temp);
 	}
-	free (t);
-	return (s);
+	free (temp);
+	return (stash);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*s;
-	char		*l;
+	static char	*stash;
+	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
-	s = ReadLine(s, fd);
-	if (!s)
+	stash = ft_read_and_join(stash, fd);
+	if (!stash)
 		return (NULL);
-	l = EndLine(s);
-	s = RecreatStash(s);
-	return (l);
+	line = ft_each_line(stash);
+	stash = start_next_stash(stash);
+	return (line);
 }
 
-int	main(void)
+/* int	main(void)
 {
-	char	*l;
+	char	*line;
 	int		i;
 	int		fd;
 
@@ -184,14 +188,14 @@ int	main(void)
 	i = 1;
 	while (fd)
 	{
-		l = get_next_line(fd);
-		if (!l)
+		line = get_next_line(fd);
+		if (!line)
 			break;
-		printf("line [%02d]: %s", i, l);
-		free(l);
+		printf("line [%02d]: %s", i, line);
+		free(line);
 		i++;
 	}
-	free (l);
+	free (line);
 	close(fd);
 	return (0);
-}
+} */
