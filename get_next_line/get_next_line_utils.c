@@ -6,7 +6,7 @@
 /*   By: rcruz-an <rcruz-an@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:40:28 by rcruz-an          #+#    #+#             */
-/*   Updated: 2022/12/24 12:57:03 by rcruz-an         ###   ########.fr       */
+/*   Updated: 2022/12/24 15:45:47 by rcruz-an         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	return (ptr);
 }
 
-int	IsItTheLastLine(const char *s)
+int	is_it_the_last_line(const char *s)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s[i] != '\n')
 	{
-		if (s[i] == NULL)
+		if (s[i] == '\0')
 			return (0);
 		i++;
 	}
@@ -44,7 +44,7 @@ int	IsItTheLastLine(const char *s)
 
 size_t	ft_strlen(const char *s)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (s[i] != '\0')
@@ -52,7 +52,7 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-size_t	LineLength(char *str)
+size_t	line_length(char *str)
 {
 	size_t	i;
 
@@ -62,7 +62,7 @@ size_t	LineLength(char *str)
 	return (i);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*str;
 	size_t	i;
