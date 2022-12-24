@@ -6,11 +6,51 @@
 /*   By: rcruz-an <rcruz-an@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:40:28 by rcruz-an          #+#    #+#             */
-/*   Updated: 2022/12/20 16:59:31 by rcruz-an         ###   ########.fr       */
+/*   Updated: 2022/12/24 12:57:03 by rcruz-an         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	char	*ptr;
+	int		i;
+	int		n;
+
+	i = 0;
+	n = nmemb * size;
+	ptr = malloc(nmemb * size);
+	if (!ptr)
+		return (NULL);
+	while (n-- > 0)
+		ptr[i++] = '\0';
+	return (ptr);
+}
+
+int	IsItTheLastLine(const char *s)
+{
+	int i;
+
+	i = 0;
+	while (s[i] != '\n')
+	{
+		if (s[i] == NULL)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+size_t	ft_strlen(const char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	return (i);
+}
 
 size_t	LineLength(char *str)
 {
@@ -22,17 +62,7 @@ size_t	LineLength(char *str)
 	return (i);
 }
 
-size_t	ft_strlen(const char *s) //Is is necessary?
-{
-	int	i;
-
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
-}
-
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*str;
 	size_t	i;
@@ -60,42 +90,3 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	str[i + j] = '\0';
 	return (str);
 }
-
-int	IsItTheLastLine(const char *s)
-{
-	int i;
-
-	i = 0;
-	while (s[i] != '\n')
-	{
-		if (s[i] == NULL)
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-void	*ft_calloc(size_t nmemb, size_t size)
-{
-	void	*str;
-	size_t	len;
-
-	len = nmemb * size;
-	str = malloc(len);
-	if (!str)
-		return (NULL);
-	ft_memset(str, 0, len);
-	return (str);
-}
-
-/* void	*ft_memset(void *s, int c, size_t n)
-{
-	if (n > 0)
-	{
-		while (n--)
-		{
-			*(unsigned char *)(s + n) = (unsigned char)(c);
-		}
-	}
-	return (s);
-} */
