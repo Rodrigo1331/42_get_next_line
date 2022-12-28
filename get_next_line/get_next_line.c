@@ -6,7 +6,7 @@
 /*   By: rcruz-an <rcruz-an@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 12:06:19 by rcruz-an          #+#    #+#             */
-/*   Updated: 2022/12/24 15:51:28 by rcruz-an         ###   ########.fr       */
+/*   Updated: 2022/12/28 15:04:14 by rcruz-an         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*rewrite_stash(char *s)
 {
-	char	*new_stash;
+	char	*new_s;
 	int		i;
 	int		j;
 
@@ -25,12 +25,12 @@ char	*rewrite_stash(char *s)
 		return (NULL);
 	}
 	j = 0;
-	new_stash = ft_calloc((ft_strlen(s) - i + 1), sizeof(char));
+	new_s = ft_calloc((ft_strlen(s) - i + 1), sizeof(char));
 	i++;
 	while (s[i])
-		new_stash[j++] = s[i++];
+		new_s[j++] = s[i++];
 	free (s);
-	return (new_stash);
+	return (new_s);
 }
 
 char	*end_line(char *s)

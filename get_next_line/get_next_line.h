@@ -6,7 +6,7 @@
 /*   By: rcruz-an <rcruz-an@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:40:37 by rcruz-an          #+#    #+#             */
-/*   Updated: 2022/12/24 15:12:00 by rcruz-an         ###   ########.fr       */
+/*   Updated: 2022/12/28 14:30:39 by rcruz-an         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@
 #  define BUFFER_SIZE 5
 # endif
 
-char	*start_next_stash(char *stash);
-char	*ft_each_line(char *stash);
-char	*ft_read_and_join(char *stash, int fd);
+char	*last_line(char *s, int fd);
+char	*end_line(char *s);
+char	*rewrite_stash(char *s);
 char	*get_next_line(int fd);
 
 char	*ft_strjoin(char const *s1, char const *s2);
