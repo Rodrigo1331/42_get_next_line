@@ -6,7 +6,7 @@
 /*   By: rcruz-an <rcruz-an@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 14:40:28 by rcruz-an          #+#    #+#             */
-/*   Updated: 2022/12/24 15:45:47 by rcruz-an         ###   ########.fr       */
+/*   Updated: 2022/12/29 14:49:04 by rcruz-an         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	n = nmemb * size;
 	ptr = malloc(nmemb * size);
 	if (!ptr)
-		return (NULL);
+		return (NULL); // also free?
 	while (n-- > 0)
 		ptr[i++] = '\0';
 	return (ptr);
@@ -67,16 +67,14 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	char	*str;
 	size_t	i;
 	size_t	j;
-	size_t	len;
 
 	if (!s1 || !s2)
 		return (NULL);
-	i = 0;
-	j = 0;
-	len = ft_strlen(s1) + ft_strlen(s2) + 1;
-	str = malloc(len * sizeof(char));
+	str = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (str == 0)
 		return (0);
+	i = 0;
+	j = 0;
 	while (ft_strlen(s1) > i)
 	{
 		str[i] = s1[i];

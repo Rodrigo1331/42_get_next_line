@@ -6,7 +6,7 @@
 /*   By: rcruz-an <rcruz-an@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 11:46:44 by rcruz-an          #+#    #+#             */
-/*   Updated: 2022/12/28 15:28:34 by rcruz-an         ###   ########.fr       */
+/*   Updated: 2022/12/29 11:19:37 by rcruz-an         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,18 +110,6 @@ char	*get_next_line(int fd)
 	ptr = get_next_line(fd1);
 	printf("%s", ptr);
 	free(ptr);
-	ptr2 = get_next_line(fd2);
-	printf("%s", ptr2);
-	free(ptr2);
-	ptr = get_next_line(fd1);
-	printf("%s", ptr);
-	free(ptr);
-	ptr2 = get_next_line(fd2);
-	printf("%s", ptr2);
-	free(ptr2);
-	ptr2 = get_next_line(fd2);
-	printf("%s", ptr2);
-	free(ptr2);
 	ptr2 = get_next_line(fd2);
 	printf("%s", ptr2);
 	free(ptr2);

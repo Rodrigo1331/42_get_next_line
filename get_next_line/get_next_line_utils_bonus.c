@@ -6,11 +6,11 @@
 /*   By: rcruz-an <rcruz-an@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 14:14:39 by rcruz-an          #+#    #+#             */
-/*   Updated: 2022/12/28 15:29:25 by rcruz-an         ###   ########.fr       */
+/*   Updated: 2022/12/29 11:17:24 by rcruz-an         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {

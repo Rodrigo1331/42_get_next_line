@@ -6,7 +6,7 @@
 /*   By: rcruz-an <rcruz-an@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 12:06:19 by rcruz-an          #+#    #+#             */
-/*   Updated: 2022/12/28 15:04:14 by rcruz-an         ###   ########.fr       */
+/*   Updated: 2022/12/29 15:20:09 by rcruz-an         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*end_line(char *s)
 	i = 0;
 	if (!s[i])
 		return (NULL);
-	l = ft_calloc((line_length(s) + 2), sizeof(char));
+	l = ft_calloc((line_length(s) + 1), sizeof(char));// + 1 or + 2
 	i = 0;
 	while (s[i] != '\n' && s[i] != '\0')
 	{
@@ -50,6 +50,7 @@ char	*end_line(char *s)
 	}
 	if (s[i] == '\n')
 		l[i] = '\n';
+	//free (s); does not work. It seems necessary though
 	return (l);
 }
 
@@ -60,12 +61,12 @@ char	*last_line(char *s, int fd)
 
 	if (!s)
 		s = ft_calloc(1, 1);
-	t = ft_calloc ((BUFFER_SIZE + 1), sizeof(char));
+	t = ft_calloc ((BUFFER_SIZE + 1), sizeof(char)); // +1 or +2
 	i = 1;
 	while (is_it_the_last_line(s) == 0 && i != 0)
 	{
 		i = read(fd, t, BUFFER_SIZE);
-		if (i < -1)
+		if (i == -1)
 		{
 			free (t);
 			free (s);
@@ -93,7 +94,7 @@ char	*get_next_line(int fd)
 	return (l);
 }
 
-/* int	main(void)
+int	main(void)
 {
 	char	*l;
 	int		i;
@@ -113,4 +114,4 @@ char	*get_next_line(int fd)
 	free (l);
 	close(fd);
 	return (0);
-} */
+} 

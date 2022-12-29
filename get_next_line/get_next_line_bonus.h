@@ -6,7 +6,7 @@
 /*   By: rcruz-an <rcruz-an@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 11:46:44 by rcruz-an          #+#    #+#             */
-/*   Updated: 2022/12/28 14:57:05 by rcruz-an         ###   ########.fr       */
+/*   Updated: 2022/12/29 11:18:13 by rcruz-an         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ char	*end_line(char *s);
 char	*rewrite_stash(char *s);
 char	*get_next_line(int fd);
 
+int		is_it_the_last_line(const char *s);
+size_t	line_length(char *str);
 char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlen(const char *s);
 void	*ft_calloc(size_t nmemb, size_t size);
-int		IsItTheLastLine(const char *s);
-size_t	LineLength(char *str);
 #endif
