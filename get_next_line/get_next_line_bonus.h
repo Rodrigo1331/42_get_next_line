@@ -6,7 +6,7 @@
 /*   By: rcruz-an <rcruz-an@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 11:46:44 by rcruz-an          #+#    #+#             */
-/*   Updated: 2022/12/29 11:18:13 by rcruz-an         ###   ########.fr       */
+/*   Updated: 2023/01/09 12:41:27 by rcruz-an         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@
 #  define BUFFER_SIZE 5
 # endif
 
+# ifndef FOPEN_MAX
+#  define FOPEN_MAX 1024
+# endif
+
 char	*last_line(char *s, int fd);
 char	*end_line(char *s);
 char	*rewrite_stash(char *s);
@@ -32,7 +36,7 @@ char	*get_next_line(int fd);
 
 int		is_it_the_last_line(const char *s);
 size_t	line_length(char *str);
-char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin(char *s1, char *s2);
 size_t	ft_strlen(const char *s);
 void	*ft_calloc(size_t nmemb, size_t size);
 #endif
